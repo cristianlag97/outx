@@ -5,10 +5,15 @@ Este es un proyecto para trabajar con:
 * Cámara
 * Tokens de acceso
 * CRUD (Create Read Update Delete) Rest API Endpoints
-* Riverpod
-* GoRouter
-* Google map
-* Mapbox
+* Riverpod (Manejador del estado de la app)
+* GoRouter (Encargasdo del esrutamiento de la app)
+* Google map (APi para mostrar el mapa en la app)
+* Mapbox (Api para consultar puntos especificos)
+* dio (Funiona como Axios)
+* equatable (en Flutter facilita la comparación eficiente de objetos personalizados en Dart)
+* dotenv (para trabajar con variables de entorno)
+* flutter_staggered_grid_view (es un widget de Flutter que permite crear mosaicos (grids) con elementos de diferentes tamaños y diseños irregulares)
+* y entre otros
 
 
 # Importante
