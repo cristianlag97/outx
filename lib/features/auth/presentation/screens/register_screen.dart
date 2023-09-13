@@ -131,7 +131,7 @@ class _RegisterForm extends ConsumerWidget {
                   ? registerform.email.errorMessage
                   : null,
             ),
-            DropdownButtonFormField(items: items, onChanged: (value) {}),
+            DropdownButtonFormField(items: [], onChanged: (value) {}),
             const SizedBox(height: 20),
             CustomTextFormField(
               controller: _passwordController,
