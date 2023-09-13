@@ -1,7 +1,12 @@
 import 'package:formz/formz.dart';
 
 // Define input validation errors
-enum PasswordError { empty, length, format }
+enum PasswordError {
+  empty,
+  less,
+  format,
+  more,
+}
 
 // Extend FormzInput and provide the input type and error type.
 class Password extends FormzInput<String, PasswordError> {
@@ -19,10 +24,14 @@ class Password extends FormzInput<String, PasswordError> {
     if (isValid || isPure) return null;
 
     if (displayError == PasswordError.empty) return 'El campo es requerido';
-    if (displayError == PasswordError.length) return 'Mínimo 6 caracteres';
+    if (displayError == PasswordError.less) return 'Mínimo 8 caracteres';
     if (displayError == PasswordError.format) {
       return 'Debe de tener Mayúscula, letras y un número';
     }
+    if (displayError == PasswordError.more) {
+      return 'Pasaste el límite de carácteres';
+    }
+    // if()
 
     return null;
   }
@@ -31,9 +40,9 @@ class Password extends FormzInput<String, PasswordError> {
   @override
   PasswordError? validator(String value) {
     if (value.isEmpty || value.trim().isEmpty) return PasswordError.empty;
-    if (value.length < 6) return PasswordError.length;
+    if (value.length < 8) return PasswordError.less;
     if (!passwordRegExp.hasMatch(value)) return PasswordError.format;
-
+    if (value.length > 100) return PasswordError.more;
     return null;
   }
 }

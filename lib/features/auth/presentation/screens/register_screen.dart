@@ -87,6 +87,8 @@ class _RegisterForm extends ConsumerWidget {
     FocusScope.of(context).requestFocus(focus);
   }
 
+  List<String> items = ['Hombre', 'Mujer', 'Otros'];
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final textStyles = Theme.of(context).textTheme;
@@ -129,6 +131,7 @@ class _RegisterForm extends ConsumerWidget {
                   ? registerform.email.errorMessage
                   : null,
             ),
+            DropdownButtonFormField(items: items, onChanged: (value) {}),
             const SizedBox(height: 20),
             CustomTextFormField(
               controller: _passwordController,

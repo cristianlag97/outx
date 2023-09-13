@@ -1,10 +1,12 @@
 // import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:outmap/features/auth/auth.dart';
 // import 'package:outmap/features/auth/presentation/providers/auth_provider.dart';
 import 'package:outmap/features/products/products.dart';
 
+import '../../features/auth/presentation/providers/providers.dart';
 import '../../features/outmap/out_map.dart';
 import 'app_router_notifier.dart';
 
@@ -12,7 +14,7 @@ final goRouterProvider = Provider((ref) {
   final goRouterNotifier = ref.read(goRouterNotifierProvider);
 
   return GoRouter(
-    initialLocation: '/',
+    initialLocation: '/splash',
     refreshListenable: goRouterNotifier,
     routes: [
       ///* Auth Routes
@@ -54,28 +56,28 @@ final goRouterProvider = Provider((ref) {
             ProductScreen(productId: state.params['id'] ?? 'no-id'),
       ),
     ],
-    // redirect: (context, state) {
-    //   final isGoingTo = state.subloc;
-    //   final authStatus = goRouterNotifier.authStatus;
-    //   debugPrint('==> $authStatus -- $isGoingTo');
+    redirect: (context, state) {
+      final isGoingTo = state.subloc;
+      final authStatus = goRouterNotifier.authStatus;
+      debugPrint('==> $authStatus -- $isGoingTo');
 
-    //   if (isGoingTo == '/splash' && authStatus == AuthStatus.checking) {
-    //     return null;
-    //   }
-    //   if (authStatus == AuthStatus.notAuthenticated) {
-    //     if (isGoingTo == '/login' || isGoingTo == '/register') return null;
-    //     return '/login';
-    //   }
+      if (isGoingTo == '/splash' && authStatus == AuthStatus.checking) {
+        return null;
+      }
+      if (authStatus == AuthStatus.notAuthenticated) {
+        if (isGoingTo == '/login' || isGoingTo == '/register') return null;
+        return '/login';
+      }
 
-    //   if (authStatus == AuthStatus.authenticated) {
-    //     if (isGoingTo == '/login' ||
-    //         isGoingTo == '/register' ||
-    //         isGoingTo == '/splash') {
-    //       return '/';
-    //     }
-    //   }
+      if (authStatus == AuthStatus.authenticated) {
+        if (isGoingTo == '/login' ||
+            isGoingTo == '/register' ||
+            isGoingTo == '/splash') {
+          return '/';
+        }
+      }
 
-    //   return null;
-    // },
+      return null;
+    },
   );
 });
