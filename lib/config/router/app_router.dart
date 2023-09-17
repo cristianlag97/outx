@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:outmap/features/auth/auth.dart';
-// import 'package:outmap/features/auth/presentation/providers/auth_provider.dart';
+import 'package:outmap/features/auth/presentation/providers/auth_provider.dart';
 import 'package:outmap/features/products/products.dart';
 
 import '../../features/auth/presentation/providers/providers.dart';
@@ -53,11 +53,11 @@ final goRouterProvider = Provider((ref) {
       GoRoute(
         path: '/product/:id',
         builder: (context, state) =>
-            ProductScreen(productId: state.params['id'] ?? 'no-id'),
+            ProductScreen(productId: state.pathParameters['id'] ?? 'no-id'),
       ),
     ],
     redirect: (context, state) {
-      final isGoingTo = state.subloc;
+      final isGoingTo = state.matchedLocation;
       final authStatus = goRouterNotifier.authStatus;
       debugPrint('==> $authStatus -- $isGoingTo');
 

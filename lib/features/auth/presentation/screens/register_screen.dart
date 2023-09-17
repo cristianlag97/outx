@@ -87,10 +87,13 @@ class _RegisterForm extends ConsumerWidget {
     FocusScope.of(context).requestFocus(focus);
   }
 
-  List<String> items = ['Hombre', 'Mujer', 'Otros'];
+  final List<String> items = ['Hombre', 'Mujer', 'Otros'];
+  final List<String> items2 = ['Persona', 'Empresa'];
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    late String selectValue = 'Hombre';
+    late String selectValu2 = 'Persona';
     final textStyles = Theme.of(context).textTheme;
 
     final registerform = ref.watch(registerProvider);
@@ -131,7 +134,20 @@ class _RegisterForm extends ConsumerWidget {
                   ? registerform.email.errorMessage
                   : null,
             ),
-            DropdownButtonFormField(items: [], onChanged: (value) {}),
+            const SizedBox(height: 20),
+            DropdownButtonFormField(
+              style: const TextStyle(fontSize: 16, color: Colors.black54),
+              value: selectValue,
+              items: items
+                  .map((e) => DropdownMenuItem(
+                        value: e, // Asigna el valor del elemento
+                        child: Text(e),
+                      ))
+                  .toList(),
+              onChanged: (value) {
+                // Puedes manejar el cambio de valor aquí
+              },
+            ),
             const SizedBox(height: 20),
             CustomTextFormField(
               controller: _passwordController,
@@ -158,6 +174,20 @@ class _RegisterForm extends ConsumerWidget {
               errorMessage: registerform.isFormPosted
                   ? registerform.repeatPassword.errorMessage
                   : null,
+            ),
+            const SizedBox(height: 20),
+            DropdownButtonFormField(
+              style: const TextStyle(fontSize: 16, color: Colors.black54),
+              value: selectValu2,
+              items: items2
+                  .map((e) => DropdownMenuItem(
+                        value: e, // Asigna el valor del elemento
+                        child: Text(e),
+                      ))
+                  .toList(),
+              onChanged: (value) {
+                // Puedes manejar el cambio de valor aquí
+              },
             ),
             const SizedBox(height: 30),
             SizedBox(
