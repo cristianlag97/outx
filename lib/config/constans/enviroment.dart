@@ -1,4 +1,4 @@
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+part of config.constants;
 
 class Environment {
   static initEnvironment() async {

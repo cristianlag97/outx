@@ -1,4 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Colors;
+
+import '../../../../config/config.dart';
 
 class SearchDestinationDelegate extends SearchDelegate {
   SearchDestinationDelegate()

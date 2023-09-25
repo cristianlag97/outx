@@ -1,8 +1,9 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Colors;
+import 'package:outmap/config/config.dart';
 
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
-    required this.controller,
+    // required this.controller,
     this.onFieldSubmitted,
     this.focusNode,
     this.label,
@@ -22,7 +23,7 @@ class CustomTextFormField extends StatelessWidget {
   final TextInputType? keyboardType;
   final Function(String)? onChanged;
   final String? Function(String?)? validator;
-  final TextEditingController controller;
+  // final TextEditingController controller;
   final FocusNode? focusNode;
   final Function(String)? onFieldSubmitted;
 
@@ -57,7 +58,7 @@ class CustomTextFormField extends StatelessWidget {
           ]),
       child: TextFormField(
         onChanged: onChanged,
-        controller: controller,
+        // controller: controller,
         focusNode: focusNode,
         onFieldSubmitted: onFieldSubmitted,
         validator: validator,
@@ -69,13 +70,13 @@ class CustomTextFormField extends StatelessWidget {
               color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),
           enabledBorder: border,
           focusedBorder: border,
-          errorBorder: UnderlineInputBorder(
+          errorBorder: const UnderlineInputBorder(
               borderSide: BorderSide(
-            color: Colors.red.shade800,
+            color: Colors.redshade,
           )),
-          focusedErrorBorder: UnderlineInputBorder(
+          focusedErrorBorder: const UnderlineInputBorder(
               borderSide: BorderSide(
-            color: Colors.red.shade800,
+            color: Colors.redshade,
           )),
           isDense: true,
           label: label != null ? Text(label!) : null,
