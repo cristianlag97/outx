@@ -1,4 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Colors;
+
+import '../../../config/config.dart';
 
 class CustomProductField extends StatelessWidget {
   final bool isTopField; // La idea es que tenga bordes redondeados arriba

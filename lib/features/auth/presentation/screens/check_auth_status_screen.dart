@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+part of features.auth.presentation.screens;
 
 class CheckAuthStatusScreen extends StatelessWidget {
   const CheckAuthStatusScreen({super.key});

@@ -1,10 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
-import 'package:outmap/features/auth/presentation/providers/auth_provider.dart';
-import 'package:outmap/features/shared/shared.dart';
-
-import '../providers/login_form_provider.dart';
+part of features.auth.presentation.screens;
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -62,8 +56,8 @@ class _LoginForm extends ConsumerWidget {
     FocusScope.of(context).requestFocus(_passwordFocusNode);
   }
 
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+  // final TextEditingController _emailController = TextEditingController();
+  // final TextEditingController _passwordController = TextEditingController();
   final FocusNode _passwordFocusNode = FocusNode();
 
   @override
@@ -86,7 +80,7 @@ class _LoginForm extends ConsumerWidget {
           const SizedBox(height: 50),
           CustomTextFormField(
             onFieldSubmitted: (_) => _submitEmail(context),
-            controller: _emailController,
+            // controller: _emailController,
             label: 'Correo',
             keyboardType: TextInputType.emailAddress,
             onChanged: ref.read(loginFormProvider.notifier).onEmailChange,
@@ -98,7 +92,7 @@ class _LoginForm extends ConsumerWidget {
             onFieldSubmitted: (_) =>
                 ref.read(loginFormProvider.notifier).onformSubmit(),
             focusNode: _passwordFocusNode,
-            controller: _passwordController,
+            // controller: _passwordController,
             label: 'Contraseña',
             obscureText: true,
             onChanged: ref.read(loginFormProvider.notifier).onPasswordChanged,

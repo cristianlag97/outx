@@ -12,6 +12,7 @@ class RegisterState {
     this.fullName = const FullName.pure(),
     this.isFormPosted = false,
     this.isValid = false,
+    this.isCompany = false,
   });
 
   final Email email;
@@ -20,6 +21,7 @@ class RegisterState {
   final FullName fullName;
   final bool isFormPosted;
   final bool isValid;
+  final bool isCompany;
 
   RegisterState copyWith({
     Email? email,
@@ -28,6 +30,7 @@ class RegisterState {
     FullName? fullName,
     bool? isFormPosted,
     bool? isValid,
+    bool? isCompany,
   }) =>
       RegisterState(
         email: email ?? this.email,
@@ -36,6 +39,7 @@ class RegisterState {
         fullName: fullName ?? this.fullName,
         isFormPosted: isFormPosted ?? this.isFormPosted,
         isValid: isValid ?? this.isValid,
+        isCompany: isCompany ?? this.isCompany,
       );
 
   @override
@@ -46,6 +50,7 @@ class RegisterState {
    password: $password,
   repeatPassword: $repeatPassword,
   fullName: $fullName,
+  isCompany: $isCompany,
   ''';
 }
 
@@ -116,6 +121,10 @@ class RegisterNotifier extends StateNotifier<RegisterState> {
       state.password.value,
       state.fullName.value,
     );
+  }
+
+  onSelectcompay() async {
+    state = state.copyWith(isCompany: true);
   }
 
   _touchEveryField() {

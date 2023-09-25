@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "553599192634",
+    "project_id": "outx-43439",
+    "storage_bucket": "outx-43439.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:553599192634:android:dfbe0ac4bbea4265c26f03",
+        "android_client_info": {
+          "package_name": "com.cristianlagunaal.outplace"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "553599192634-fsmoan8gk3fhepuhta4oodoc0elbmuiu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQyBP3FoYGGnsTNeebJb3iEcKTFLLkdWQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "553599192634-fsmoan8gk3fhepuhta4oodoc0elbmuiu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

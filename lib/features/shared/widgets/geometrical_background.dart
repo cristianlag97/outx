@@ -1,5 +1,6 @@
 import 'dart:math' show pi;
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Colors;
+import 'package:outmap/config/config.dart';
 
 class GeometricalBackground extends StatelessWidget {
   final Widget child;
