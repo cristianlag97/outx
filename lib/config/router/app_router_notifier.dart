@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:outmap/features/auth/presentation/providers/auth_provider.dart';
+
+import '../../features/auth/presentation/providers/providers.dart';
 
 class GoRouterNotifier extends ChangeNotifier {
   GoRouterNotifier(this._authNotifier) {

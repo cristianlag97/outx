@@ -72,7 +72,7 @@ class _LoginForm extends ConsumerWidget {
     });
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 50),
+      padding: const EdgeInsets.symmetric(horizontal: 40),
       child: Column(
         children: [
           const SizedBox(height: 30),
@@ -101,16 +101,37 @@ class _LoginForm extends ConsumerWidget {
           ),
           const SizedBox(height: 30),
           SizedBox(
-              width: double.infinity,
-              height: 60,
-              child: CustomFilledButton(
-                text: 'Ingresar',
-                buttonColor: Colors.black,
-                onPressed: loginForm.isPosting
-                    ? null
-                    : ref.read(loginFormProvider.notifier).onformSubmit,
-              )),
-          const Spacer(flex: 2),
+            width: double.infinity,
+            height: 60,
+            child: CustomFilledButton(
+              text: 'Ingresar',
+              buttonColor: Colors.black,
+              onPressed: loginForm.isPosting
+                  ? null
+                  : ref.read(loginFormProvider.notifier).onformSubmit,
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              FilledButton.icon(
+                  style: FilledButton.styleFrom(backgroundColor: Colors.black),
+                  onPressed: () {
+                    ref.read(authFirebaseProvider.notifier).signInWithGoogle();
+                  },
+                  icon: const FaIcon(FontAwesomeIcons.google),
+                  label: const Text('Google')),
+              FilledButton.icon(
+                  style: FilledButton.styleFrom(backgroundColor: Colors.black),
+                  onPressed: () async {
+                    await ref
+                        .read(authFirebaseProvider.notifier)
+                        .signInWithFacebook();
+                  },
+                  icon: const FaIcon(FontAwesomeIcons.facebook),
+                  label: const Text('Facebook')),
+            ],
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

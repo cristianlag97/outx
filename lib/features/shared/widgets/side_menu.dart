@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:outmap/features/auth/presentation/providers/auth_provider.dart';
 import 'package:outmap/features/shared/shared.dart';
+
+import '../../auth/presentation/providers/providers.dart';
 
 class SideMenu extends StatefulWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;

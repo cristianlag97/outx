@@ -24,6 +24,6 @@ class Product {
   List<String> sizes;
   String gender;
   List<String> tags;
-  User? user;
+  UserEntity? user;
   List<String> images;
 }
