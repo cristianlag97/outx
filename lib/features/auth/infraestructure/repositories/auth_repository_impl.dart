@@ -1,25 +1,31 @@
 import '../../domain/domain.dart';
 import '../infraestructure.dart';
 
-class AuthRepositoryImpl extends AuthDataRepository {
+class AuthRepositoryImpl extends AuthRepository {
   AuthRepositoryImpl({AuthDataSource? authDataSource})
       : authDataSource = authDataSource ?? AuthDatasourceImpl();
 
   final AuthDataSource authDataSource;
 
   @override
-  Future<User> checkAuthStatus(String token) {
+  Future<UserEntity> checkAuthStatus(String token) {
     return authDataSource.checkAuthStatus(token);
   }
 
   @override
-  Future<User> login(String email, String password) {
+  Future<UserEntity> login(String email, String password) {
     return authDataSource.login(email, password);
   }
 
   @override
-  Future<User> register(String email, String password, String fullName) {
+  Future<UserEntity> register(String email, String password, String fullName) {
     return authDataSource.register(email, password, fullName);
+  }
+
+  @override
+  Future<void> logout() {
+    // TODO: implement logout
+    throw UnimplementedError();
   }
 }
 

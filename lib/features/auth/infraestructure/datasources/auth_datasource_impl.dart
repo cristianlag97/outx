@@ -8,7 +8,7 @@ class AuthDatasourceImpl extends AuthDataSource {
   final dio = Dio(BaseOptions(baseUrl: Environment.apiUrl));
 
   @override
-  Future<User> checkAuthStatus(String token) async {
+  Future<UserEntity> checkAuthStatus(String token) async {
     try {
       final response = await dio.get(
         '/auth/check-status',
@@ -33,7 +33,7 @@ class AuthDatasourceImpl extends AuthDataSource {
   }
 
   @override
-  Future<User> login(String email, String password) async {
+  Future<UserEntity> login(String email, String password) async {
     try {
       final response = await dio.post('/auth/login', data: {
         'email': email,
@@ -58,7 +58,8 @@ class AuthDatasourceImpl extends AuthDataSource {
   }
 
   @override
-  Future<User> register(String email, String password, String fullName) async {
+  Future<UserEntity> register(
+      String email, String password, String fullName) async {
     try {
       final response = await dio.post('/auth/register', data: {
         'email': email,
@@ -80,5 +81,11 @@ class AuthDatasourceImpl extends AuthDataSource {
     } catch (e) {
       throw Exception();
     }
+  }
+
+  @override
+  Future<void> logout() {
+    // TODO: implement logout
+    throw UnimplementedError();
   }
 }

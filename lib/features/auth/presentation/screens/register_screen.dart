@@ -79,6 +79,11 @@ class _RegisterForm extends ConsumerWidget {
 
     bool isCompany = false;
 
+    ref.listen(authFirebaseProvider, (previous, next) {
+      if (next.errorMessage.isEmpty) return;
+      showSnackbar(context, next.errorMessage);
+    });
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 50),
       child: SingleChildScrollView(
@@ -121,7 +126,9 @@ class _RegisterForm extends ConsumerWidget {
                       ))
                   .toList(),
               onChanged: (value) {
-                // Puedes manejar el cambio de valor aquí
+                ref
+                    .read(registerProvider.notifier)
+                    .onSelectGender(value ?? selectValue);
               },
             ),
             const SizedBox(height: 20),
@@ -163,7 +170,9 @@ class _RegisterForm extends ConsumerWidget {
                   .toList(),
               onChanged: (value) {
                 isCompany = value == 'Empresa';
-                print(isCompany);
+                ref
+                    .read(registerProvider.notifier)
+                    .onSelectType(value ?? selectValu2);
               },
             ),
             const SizedBox(height: 30),
@@ -213,9 +222,9 @@ class _RegisterFormCompany extends ConsumerWidget {
     );
   }
 
-  void _submitInput(BuildContext context, FocusNode focus) {
-    FocusScope.of(context).requestFocus(focus);
-  }
+  // void _submitInput(BuildContext context, FocusNode focus) {
+  //   FocusScope.of(context).requestFocus(focus);
+  // }
 
   final List<String> items = ['Hombre', 'Mujer', 'Otros'];
   final List<String> items2 = ['Deportes', 'Comida'];

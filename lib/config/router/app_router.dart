@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:outmap/features/auth/auth.dart';
-import 'package:outmap/features/auth/presentation/providers/auth_provider.dart';
 import 'package:outmap/features/products/products.dart';
 
 import '../../features/auth/presentation/providers/providers.dart';

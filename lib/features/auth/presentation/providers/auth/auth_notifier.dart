@@ -1,33 +1,4 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:outmap/features/auth/infraestructure/infraestructure.dart';
-import 'package:outmap/features/shared/infraestructure/services/key_value_storage_service_impl.dart';
-
-import '../../domain/domain.dart';
-
-enum AuthStatus { checking, authenticated, notAuthenticated }
-
-class AuthState {
-  AuthState({
-    this.authStatus = AuthStatus.checking,
-    this.user,
-    this.errorMessage = '',
-  });
-
-  final AuthStatus authStatus;
-  final User? user;
-  final String errorMessage;
-
-  AuthState copyWith({
-    AuthStatus? authStatus,
-    User? user,
-    String? errorMessage,
-  }) =>
-      AuthState(
-        authStatus: authStatus ?? this.authStatus,
-        user: user ?? this.user,
-        errorMessage: errorMessage ?? this.errorMessage,
-      );
-}
+part of features.auth.providers.auth;
 
 class AuthNotifier extends StateNotifier<AuthState> {
   AuthNotifier({
@@ -37,7 +8,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
     checkAuthStatus();
   }
 
-  final AuthDataRepository authDataRepository;
+  final AuthRepository authDataRepository;
   final KeyValueStorageServiceimpl keyValueStorageService;
 
   Future<void> loginUser(String email, String password) async {
@@ -79,7 +50,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
     }
   }
 
-  void _setLoggerUser(User user) async {
+  void _setLoggerUser(UserEntity user) async {
     await keyValueStorageService.setKeyValue('token', user.token);
     state = state.copyWith(
       user: user,
@@ -97,13 +68,3 @@ class AuthNotifier extends StateNotifier<AuthState> {
     );
   }
 }
-
-final authProvider = StateNotifierProvider<AuthNotifier, AuthState>((ref) {
-  final authRepository = AuthRepositoryImpl();
-  final keyValueStorageService = KeyValueStorageServiceimpl();
-
-  return AuthNotifier(
-    authDataRepository: authRepository,
-    keyValueStorageService: keyValueStorageService,
-  );
-});

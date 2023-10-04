@@ -137,9 +137,7 @@ class _SizeSelector extends StatelessWidget {
             label: Text(size, style: const TextStyle(fontSize: 10)));
       }).toList(),
       selected: Set.from(selectedSizes),
-      onSelectionChanged: (newSelection) {
-        print(newSelection);
-      },
+      onSelectionChanged: (newSelection) {},
       multiSelectionEnabled: true,
     );
   }
@@ -170,9 +168,7 @@ class _GenderSelector extends StatelessWidget {
               label: Text(size, style: const TextStyle(fontSize: 12)));
         }).toList(),
         selected: {selectedGender},
-        onSelectionChanged: (newSelection) {
-          print(newSelection);
-        },
+        onSelectionChanged: (newSelection) {},
       ),
     );
   }
