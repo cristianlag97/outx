@@ -15,7 +15,10 @@ class AuthNotifier extends StateNotifier<AuthState> {
     await Future.delayed(const Duration(milliseconds: 500));
 
     try {
-      final user = await authDataRepository.login(email, password);
+      final user = await authDataRepository.login(
+        email: email,
+        password: password,
+      );
       _setLoggerUser(user);
     } on CustomError catch (e) {
       logout(e.message);
@@ -24,11 +27,11 @@ class AuthNotifier extends StateNotifier<AuthState> {
     }
   }
 
-  void registerUser(String email, String password, String fullName) async {
+  void registerUser(Map<String, dynamic> json) async {
     await Future.delayed(const Duration(milliseconds: 500));
 
     try {
-      final user = await authDataRepository.register(email, password, fullName);
+      final user = await authDataRepository.register(json);
       _setLoggerUser(user);
     } on CustomError catch (e) {
       logout(e.message);

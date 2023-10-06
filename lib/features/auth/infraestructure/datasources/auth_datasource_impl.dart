@@ -33,7 +33,10 @@ class AuthDatasourceImpl extends AuthDataSource {
   }
 
   @override
-  Future<UserEntity> login(String email, String password) async {
+  Future<UserEntity> login({
+    required String email,
+    required String password,
+  }) async {
     try {
       final response = await dio.post('/auth/login', data: {
         'email': email,
@@ -58,20 +61,33 @@ class AuthDatasourceImpl extends AuthDataSource {
   }
 
   @override
-  Future<UserEntity> register(
-      String email, String password, String fullName) async {
+  Future<void> logout() {
+    // TODO: implement logout
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<UserEntity> loginWithFacebook() {
+    // TODO: implement loginWithFacebook
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<UserEntity> loginWithGoogle() {
+    // TODO: implement loginWithGoogle
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<UserEntity> register(Map<String, dynamic> json) async {
     try {
-      final response = await dio.post('/auth/register', data: {
-        'email': email,
-        'password': password,
-        'fullName': fullName,
-      });
+      final response = await dio.post('/auth/sign-up', data: json);
       final user = UserMapper.userJsonToEntity(response.data);
       return user;
     } on DioException catch (e) {
       if (e.response?.statusCode == 400) {
         throw CustomError(
-          'Correo ya existe',
+          e.response!.data['message'],
         );
       }
       if (e.type == DioExceptionType.connectionTimeout) {
@@ -81,11 +97,5 @@ class AuthDatasourceImpl extends AuthDataSource {
     } catch (e) {
       throw Exception();
     }
-  }
-
-  @override
-  Future<void> logout() {
-    // TODO: implement logout
-    throw UnimplementedError();
   }
 }

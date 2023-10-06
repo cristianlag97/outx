@@ -40,7 +40,7 @@ class RegisterScreen extends ConsumerWidget {
             ),
             const SizedBox(height: 50),
             Container(
-              height: size.height - 200, // 80 los dos sizebox y 100 el ícono
+              height: size.height - 200,
               width: double.infinity,
               decoration: BoxDecoration(
                 color: scaffoldBackgroundColor,
@@ -77,8 +77,6 @@ class _RegisterForm extends ConsumerWidget {
 
     final registerform = ref.watch(registerProvider);
 
-    bool isCompany = false;
-
     ref.listen(authFirebaseProvider, (previous, next) {
       if (next.errorMessage.isEmpty) return;
       showSnackbar(context, next.errorMessage);
@@ -93,8 +91,6 @@ class _RegisterForm extends ConsumerWidget {
             Text('Nueva cuenta', style: textStyles.titleMedium),
             const SizedBox(height: 30),
             CustomTextFormField(
-              // controller: _fullNameController,
-              // onFieldSubmitted: (_) => _submitInput(context, _emailFocusNode),
               label: 'Nombre completo',
               keyboardType: TextInputType.emailAddress,
               onChanged: ref.read(registerProvider.notifier).onFullNameChange,
@@ -104,10 +100,6 @@ class _RegisterForm extends ConsumerWidget {
             ),
             const SizedBox(height: 20),
             CustomTextFormField(
-              // // controller: _emailController,
-              // focusNode: _emailFocusNode,
-              // onFieldSubmitted: (_) =>
-              //     _submitInput(context, _passwordFocusNode),
               label: 'Correo',
               keyboardType: TextInputType.emailAddress,
               onChanged: ref.read(registerProvider.notifier).onEmailChange,
@@ -133,10 +125,6 @@ class _RegisterForm extends ConsumerWidget {
             ),
             const SizedBox(height: 20),
             CustomTextFormField(
-              // // controller: _passwordController,
-              // focusNode: _passwordFocusNode,
-              // onFieldSubmitted: (_) =>
-              //     _submitInput(context, _repeatPasswordFocusNode),
               label: 'Contraseña',
               obscureText: true,
               onChanged: ref.read(registerProvider.notifier).onPasswordChanged,
@@ -169,7 +157,6 @@ class _RegisterForm extends ConsumerWidget {
                       ))
                   .toList(),
               onChanged: (value) {
-                isCompany = value == 'Empresa';
                 ref
                     .read(registerProvider.notifier)
                     .onSelectType(value ?? selectValu2);
@@ -180,10 +167,10 @@ class _RegisterForm extends ConsumerWidget {
                 width: double.infinity,
                 height: 60,
                 child: CustomFilledButton(
-                  text: 'Crear',
+                  text: registerform.type == 'Empresa' ? 'Siguiente' : 'Crear',
                   buttonColor: Colors.black,
                   onPressed: () {
-                    if (isCompany) {
+                    if (registerform.type == 'Empresa') {
                       ref.read(registerProvider.notifier).onSelectcompay();
                     } else {
                       ref.read(registerProvider.notifier).onSubmit();
@@ -222,11 +209,6 @@ class _RegisterFormCompany extends ConsumerWidget {
     );
   }
 
-  // void _submitInput(BuildContext context, FocusNode focus) {
-  //   FocusScope.of(context).requestFocus(focus);
-  // }
-
-  final List<String> items = ['Hombre', 'Mujer', 'Otros'];
   final List<String> items2 = ['Deportes', 'Comida'];
 
   @override
@@ -235,8 +217,6 @@ class _RegisterFormCompany extends ConsumerWidget {
     final textStyles = Theme.of(context).textTheme;
 
     final registerform = ref.watch(registerProvider);
-
-    bool isCompany = false;
 
     ref.listen(authProvider, (previous, next) {
       if (next.errorMessage.isEmpty) return;
@@ -252,50 +232,38 @@ class _RegisterFormCompany extends ConsumerWidget {
             Text('Cuenta empresa', style: textStyles.titleMedium),
             const SizedBox(height: 30),
             CustomTextFormField(
-              // controller: _nameCompany,
-              // onFieldSubmitted: (_) => _submitInput(context, _emailFocusNode),
               label: 'Nombre Empresa',
-              keyboardType: TextInputType.emailAddress,
-              onChanged: ref.read(registerProvider.notifier).onFullNameChange,
+              keyboardType: TextInputType.text,
+              onChanged:
+                  ref.read(registerProvider.notifier).onFullNameCompanyChange,
               errorMessage: registerform.isFormPosted
                   ? registerform.fullName.errorMessage
                   : null,
             ),
             const SizedBox(height: 20),
             CustomTextFormField(
-              // // controller: _nitController,
-              // focusNode: _emailFocusNode,
-              // onFieldSubmitted: (_) =>
-              //     _submitInput(context, _passwordFocusNode),
               label: 'NIT',
-              keyboardType: TextInputType.emailAddress,
-              onChanged: ref.read(registerProvider.notifier).onEmailChange,
+              keyboardType: TextInputType.number,
+              onChanged: ref.read(registerProvider.notifier).onNitChange,
               errorMessage: registerform.isFormPosted
                   ? registerform.email.errorMessage
                   : null,
             ),
             const SizedBox(height: 20),
             CustomTextFormField(
-              // // controller: _razonSocialController,
-              // focusNode: _emailFocusNode,
-              // onFieldSubmitted: (_) =>
-              //     _submitInput(context, _passwordFocusNode),
               label: 'Razón social',
-              keyboardType: TextInputType.emailAddress,
-              onChanged: ref.read(registerProvider.notifier).onEmailChange,
+              keyboardType: TextInputType.text,
+              onChanged:
+                  ref.read(registerProvider.notifier).onBusinessNameChange,
               errorMessage: registerform.isFormPosted
                   ? registerform.email.errorMessage
                   : null,
             ),
             const SizedBox(height: 20),
             CustomTextFormField(
-              // // controller: _cedulaController,
-              // focusNode: _passwordFocusNode,
-              // onFieldSubmitted: (_) =>
-              //     _submitInput(context, _repeatPasswordFocusNode),
               label: 'Cedula',
-              obscureText: true,
-              onChanged: ref.read(registerProvider.notifier).onPasswordChanged,
+              keyboardType: TextInputType.number,
+              onChanged: ref.read(registerProvider.notifier).onCedulaChange,
               errorMessage: registerform.isFormPosted
                   ? registerform.password.errorMessage
                   : null,
@@ -311,8 +279,9 @@ class _RegisterFormCompany extends ConsumerWidget {
                       ))
                   .toList(),
               onChanged: (value) {
-                isCompany = value == 'Empresa';
-                print(isCompany);
+                ref
+                    .read(registerProvider.notifier)
+                    .onSelectCategory(value ?? selectValu2);
               },
             ),
             const SizedBox(height: 30),

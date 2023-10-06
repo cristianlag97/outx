@@ -6,7 +6,7 @@ class RegisterNotifier extends StateNotifier<RegisterState> {
     required this.registerFirebaseUserCallback,
   }) : super(RegisterState());
 
-  final Function(String, String, String) registerUserCallback;
+  final Function(Map<String, dynamic> json) registerUserCallback;
   final Function({
     required String email,
     required String password,
@@ -24,6 +24,10 @@ class RegisterNotifier extends StateNotifier<RegisterState> {
         state.password,
         state.fullName,
         state.repeatPassword,
+        state.fullNameCompany,
+        state.nit,
+        state.businessName,
+        state.cedula,
       ]),
     );
   }
@@ -37,6 +41,10 @@ class RegisterNotifier extends StateNotifier<RegisterState> {
         state.email,
         state.fullName,
         state.repeatPassword,
+        state.fullNameCompany,
+        state.nit,
+        state.businessName,
+        state.cedula,
       ]),
     );
   }
@@ -50,6 +58,10 @@ class RegisterNotifier extends StateNotifier<RegisterState> {
         state.email,
         state.password,
         state.repeatPassword,
+        state.fullNameCompany,
+        state.nit,
+        state.businessName,
+        state.cedula,
       ]),
     );
   }
@@ -63,7 +75,80 @@ class RegisterNotifier extends StateNotifier<RegisterState> {
         state.email,
         state.password,
         state.fullName,
+        state.fullNameCompany,
+        state.nit,
+        state.businessName,
+        state.cedula,
       ]),
+    );
+  }
+
+  onFullNameCompanyChange(String value) {
+    final newFullNameCompany = FullNameCompany.dirty(value);
+    state = state.copyWith(
+      fullNameCompany: newFullNameCompany,
+      isValid: Formz.validate([
+        newFullNameCompany,
+        state.fullName,
+        state.email,
+        state.password,
+        state.repeatPassword,
+        state.nit,
+        state.businessName,
+        state.cedula,
+      ]),
+    );
+  }
+
+  onNitChange(String value) {
+    final newNit = Nit.dirty(value);
+    state = state.copyWith(
+      nit: newNit,
+      isValid: Formz.validate([
+        newNit,
+        state.fullName,
+        state.email,
+        state.password,
+        state.repeatPassword,
+        state.fullNameCompany,
+        state.businessName,
+        state.cedula,
+      ]),
+    );
+  }
+
+  onBusinessNameChange(String value) {
+    final newBusinessName = BusinessName.dirty(value);
+    state = state.copyWith(
+      businessName: newBusinessName,
+      isValid: Formz.validate([
+        newBusinessName,
+        state.fullNameCompany,
+        state.fullName,
+        state.email,
+        state.password,
+        state.repeatPassword,
+        state.nit,
+        state.cedula,
+      ]),
+    );
+  }
+
+  onCedulaChange(String value) {
+    final newCedula = Cedula.dirty(value);
+    state = state.copyWith(
+      cedula: newCedula,
+      isValid: Formz.validate([
+        newCedula,
+        state.fullNameCompany,
+        state.fullName,
+        state.email,
+        state.password,
+        state.repeatPassword,
+        state.nit,
+        state.businessName
+      ]),
+      // newBusinessName,
     );
   }
 
@@ -75,24 +160,46 @@ class RegisterNotifier extends StateNotifier<RegisterState> {
     state = state.copyWith(type: value);
   }
 
+  onSelectCategory(String value) {
+    state = state.copyWith(category: value);
+  }
+
   onSubmit() async {
+    Map<String, dynamic> sendData = {};
     _touchEveryField();
 
     if (!state.isValid) return;
-    await registerFirebaseUserCallback(
-      email: state.email.value,
-      password: state.password.value,
-      fullName: state.fullName.value,
-      gender: state.gender,
-      type: state.type,
-    );
-    //TODO: LLamar funcionalidad de abajo en el controlador de firebase
-
-    // await registerUserCallback(
-    //   state.email.value,
-    //   state.password.value,
-    //   state.fullName.value,
+    //TODO: Funcionalidad Firebase
+    // await registerFirebaseUserCallback(
+    //   email: state.email.value,
+    //   password: state.password.value,
+    //   fullName: state.fullName.value,
+    //   gender: state.gender,
+    //   type: state.type,
     // );
+    if (state.isCompany) {
+      sendData = <String, dynamic>{
+        "fullName": state.fullName.value,
+        "email": state.email.value,
+        "gender": state.gender,
+        "password": state.password.value,
+        "isCompany": state.isCompany,
+        "fullNameCompany": state.fullNameCompany.value,
+        "nit": state.nit.value,
+        "reasonSocial": state.businessName.value,
+        "cedula": state.cedula.value,
+        "category": state.category,
+      };
+    } else {
+      sendData = <String, dynamic>{
+        "fullName": state.fullName.value,
+        "email": state.email.value,
+        "gender": state.gender,
+        "password": state.password.value,
+        "isCompany": state.isCompany
+      };
+    }
+    await registerUserCallback(sendData);
   }
 
   onSelectcompay() async {

@@ -13,19 +13,28 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<UserEntity> login(String email, String password) {
-    return authDataSource.login(email, password);
-  }
-
-  @override
-  Future<UserEntity> register(String email, String password, String fullName) {
-    return authDataSource.register(email, password, fullName);
+  Future<UserEntity> login({required String email, required String password}) {
+    return authDataSource.login(email: email, password: password);
   }
 
   @override
   Future<void> logout() {
-    // TODO: implement logout
-    throw UnimplementedError();
+    return authDataSource.logout();
+  }
+
+  @override
+  Future<UserEntity> loginWithFacebook() {
+    return authDataSource.loginWithFacebook();
+  }
+
+  @override
+  Future<UserEntity> loginWithGoogle() {
+    return authDataSource.loginWithGoogle();
+  }
+
+  @override
+  Future<UserEntity> register(Map<String, dynamic> json) {
+    return authDataSource.register(json);
   }
 }
 

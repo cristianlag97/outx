@@ -57,6 +57,8 @@ class CustomTextFormField extends StatelessWidget {
                 offset: const Offset(0, 5))
           ]),
       child: TextFormField(
+        onTapOutside: (PointerDownEvent event) =>
+            FocusScope.of(context).unfocus(),
         onChanged: onChanged,
         // controller: controller,
         focusNode: focusNode,

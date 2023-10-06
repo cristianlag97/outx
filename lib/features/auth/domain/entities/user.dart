@@ -3,7 +3,7 @@ class UserEntity {
     required this.id,
     required this.email,
     required this.fullName,
-    required this.roles,
+    required this.role,
     required this.token,
     required this.photoUrl,
   });
@@ -11,9 +11,9 @@ class UserEntity {
   final String id;
   final String email;
   final String fullName;
-  final List<String> roles;
+  final String role;
   final String token;
   final String photoUrl;
 
-  bool get isAdmin => roles.contains('admin');
+  bool get isAdmin => role.contains('admin');
 }
