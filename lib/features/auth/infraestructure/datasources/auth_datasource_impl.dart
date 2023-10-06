@@ -38,7 +38,7 @@ class AuthDatasourceImpl extends AuthDataSource {
     required String password,
   }) async {
     try {
-      final response = await dio.post('/auth/login', data: {
+      final response = await dio.post('/auth/sign-in', data: {
         'email': email,
         'password': password,
       });

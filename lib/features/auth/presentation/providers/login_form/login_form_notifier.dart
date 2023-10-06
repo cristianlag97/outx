@@ -35,11 +35,11 @@ class LoginFormNotifier extends StateNotifier<LoginFormState> {
 
     state = state.copyWith(isPosting: true);
 
-    await loginFirebaseUserCallback(
-      email: state.email.value,
-      password: state.password.value,
-    );
-    // await loginUserCallback(state.email.value, state.password.value);
+    // await loginFirebaseUserCallback(
+    //   email: state.email.value,
+    //   password: state.password.value,
+    // );
+    await loginUserCallback(state.email.value, state.password.value);
     state = state.copyWith(isPosting: false);
   }
 

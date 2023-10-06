@@ -56,8 +56,6 @@ class _LoginForm extends ConsumerWidget {
     FocusScope.of(context).requestFocus(_passwordFocusNode);
   }
 
-  // final TextEditingController _emailController = TextEditingController();
-  // final TextEditingController _passwordController = TextEditingController();
   final FocusNode _passwordFocusNode = FocusNode();
 
   @override
@@ -80,7 +78,6 @@ class _LoginForm extends ConsumerWidget {
           const SizedBox(height: 50),
           CustomTextFormField(
             onFieldSubmitted: (_) => _submitEmail(context),
-            // controller: _emailController,
             label: 'Correo',
             keyboardType: TextInputType.emailAddress,
             onChanged: ref.read(loginFormProvider.notifier).onEmailChange,
@@ -92,7 +89,6 @@ class _LoginForm extends ConsumerWidget {
             onFieldSubmitted: (_) =>
                 ref.read(loginFormProvider.notifier).onformSubmit(),
             focusNode: _passwordFocusNode,
-            // controller: _passwordController,
             label: 'Contraseña',
             obscureText: true,
             onChanged: ref.read(loginFormProvider.notifier).onPasswordChanged,
