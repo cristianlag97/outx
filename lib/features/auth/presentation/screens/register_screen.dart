@@ -158,7 +158,7 @@ class _RegisterForm extends ConsumerWidget {
             text: 'REGISTRARME',
             left: 50,
             buttonColor: Colors.colorSeed,
-            onPressed: ref.read(registerProvider.notifier).onSubmit(),
+            onPressed: ref.read(registerProvider.notifier).onSubmit,
             icon: Icons.arrow_forward_rounded,
           ),
         ],

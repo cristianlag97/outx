@@ -177,6 +177,7 @@ class RegisterNotifier extends StateNotifier<RegisterState> {
     _touchEveryField();
 
     if (!state.isValid) return;
+
     if (state.isCompany) {
       sendData = <String, dynamic>{
         "fullName": state.fullName.value,
