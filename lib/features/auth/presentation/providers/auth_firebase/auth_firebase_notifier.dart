@@ -36,14 +36,13 @@ class AuthFirebaseNotifier extends StateNotifier<AuthFirebaseState> {
   }) async {
     await Future.delayed(const Duration(milliseconds: 500));
     try {
-      final user = await authFirebaseRepository.register(
+      await authFirebaseRepository.register(
         email: email,
         password: password,
         fullName: fullName,
         gender: gender,
         type: type,
       );
-      print('==> user2: $user');
     } on CustomError catch (e) {
       firebaseLogout(e.message);
     } catch (e) {
@@ -53,8 +52,7 @@ class AuthFirebaseNotifier extends StateNotifier<AuthFirebaseState> {
 
   void signInWithGoogle() async {
     try {
-      final user = await authFirebaseRepository.loginWithGoogle();
-      print('print desde el notifier: $user');
+      await authFirebaseRepository.loginWithGoogle();
     } on CustomError catch (e) {
       debugPrint('Error: ${e.message}');
       throw firebaseLogout(e.message);
@@ -67,7 +65,7 @@ class AuthFirebaseNotifier extends StateNotifier<AuthFirebaseState> {
   Future<User?> signInWithFacebook() async {
     try {
       final user = await authFirebaseRepository.loginWithFacebook();
-      print('print desde el notifier: $user');
+
       return user;
     } on CustomError catch (e) {
       debugPrint('Error: ${e.message}');

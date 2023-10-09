@@ -25,7 +25,6 @@ class LoginFormNotifier extends StateNotifier<LoginFormState> {
   }
 
   Future<void> checkInRemember() async {
-    print('Entramos acá XD');
     try {
       final isRemember =
           await keyValueStorageService.getValue<bool>('isRemembreLogin');
@@ -68,8 +67,6 @@ class LoginFormNotifier extends StateNotifier<LoginFormState> {
   }
 
   saveLogin() async {
-    print(
-        'Guardamos data : ${state.email.value} -- ${state.password.value} -- ${state.isRemember}');
     await keyValueStorageService.setKeyValue('emailLogin', state.email.value);
     await keyValueStorageService.setKeyValue(
         'passwordLogin', state.password.value);

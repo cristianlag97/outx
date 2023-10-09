@@ -57,8 +57,7 @@ class _LoginForm extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final textStyles = Theme.of(context).textTheme;
     final loginForm = ref.watch(loginFormProvider);
-    print(
-        'Desde la vista: ${loginForm.email.value} -- ${loginForm.password.value} -- ${loginForm.isRemember}');
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
@@ -84,7 +83,7 @@ class _LoginForm extends ConsumerWidget {
           ),
           const SizedBox(height: 18),
           CustomTextFormField(
-            initialValue:loginForm.password.value,
+            initialValue: loginForm.password.value,
             keyboardType: TextInputType.text,
             onActivateObscureText:
                 ref.read(loginFormProvider.notifier).onChangeObscureText,
