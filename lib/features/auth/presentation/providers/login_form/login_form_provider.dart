@@ -14,5 +14,6 @@ AutoDisposeStateNotifierProvider<LoginFormNotifier, LoginFormState>
   return LoginFormNotifier(
     loginUserCallback: loginUserCallback,
     loginFirebaseUserCallback: loginFirebaseUserCallback,
+    keyValueStorageService: KeyValueStorageServiceimpl(),
   );
 });

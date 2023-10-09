@@ -1,5 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:outmap/features/shared/infraestructure/services/key_value_storage_service.dart';
+
+import 'key_value_storage_service.dart';
 
 class KeyValueStorageServiceimpl extends KeyValueStorageService {
   Future<SharedPreferences> getSharedpreferences() async {
@@ -15,6 +16,8 @@ class KeyValueStorageServiceimpl extends KeyValueStorageService {
         return pref.getInt(key) as T?;
       case String:
         return pref.getString(key) as T?;
+      case bool:
+        return pref.getBool(key) as T;
       default:
         throw UnimplementedError(
           'Get not implemented for type ${T.runtimeType}',
@@ -37,6 +40,9 @@ class KeyValueStorageServiceimpl extends KeyValueStorageService {
         break;
       case String:
         pref.setString(key, value as String);
+        break;
+      case bool:
+        pref.setBool(key, value as bool);
         break;
       default:
         throw UnimplementedError(

@@ -5,13 +5,11 @@ import '../../domain/domain.dart';
 import '../infraestructure.dart';
 
 class AuthDatasourceImpl extends AuthDataSource {
-  final dio = Dio(BaseOptions(baseUrl: Environment.apiUrl));
-
   @override
   Future<UserEntity> checkAuthStatus(String token) async {
     try {
       final response = await dio.get(
-        '/auth/check-status',
+        checkAuthStatusApi,
         options: Options(
           headers: {'Authorization': 'Bearer $token'},
         ),
@@ -38,7 +36,7 @@ class AuthDatasourceImpl extends AuthDataSource {
     required String password,
   }) async {
     try {
-      final response = await dio.post('/auth/sign-in', data: {
+      final response = await dio.post(loginApi, data: {
         'email': email,
         'password': password,
       });
@@ -81,7 +79,7 @@ class AuthDatasourceImpl extends AuthDataSource {
   @override
   Future<UserEntity> register(Map<String, dynamic> json) async {
     try {
-      final response = await dio.post('/auth/sign-up', data: json);
+      final response = await dio.post(registerApi, data: json);
       final user = UserMapper.userJsonToEntity(response.data);
       return user;
     } on DioException catch (e) {

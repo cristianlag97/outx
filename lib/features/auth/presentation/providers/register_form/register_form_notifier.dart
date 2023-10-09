@@ -49,6 +49,10 @@ class RegisterNotifier extends StateNotifier<RegisterState> {
     );
   }
 
+  onChangeObscureText() {
+    state = state.copyWith(isObscureText: !state.isObscureText);
+  }
+
   onFullNameChange(String value) {
     final newFullName = FullName.dirty(value);
     state = state.copyWith(
@@ -160,6 +164,10 @@ class RegisterNotifier extends StateNotifier<RegisterState> {
     state = state.copyWith(type: value);
   }
 
+  onIsCompany(bool value) {
+    state = state.copyWith(isCompany: value);
+  }
+
   onSelectCategory(String value) {
     state = state.copyWith(category: value);
   }
@@ -169,14 +177,6 @@ class RegisterNotifier extends StateNotifier<RegisterState> {
     _touchEveryField();
 
     if (!state.isValid) return;
-    //TODO: Funcionalidad Firebase
-    // await registerFirebaseUserCallback(
-    //   email: state.email.value,
-    //   password: state.password.value,
-    //   fullName: state.fullName.value,
-    //   gender: state.gender,
-    //   type: state.type,
-    // );
     if (state.isCompany) {
       sendData = <String, dynamic>{
         "fullName": state.fullName.value,

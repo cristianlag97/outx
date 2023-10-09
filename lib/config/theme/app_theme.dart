@@ -11,12 +11,11 @@ class AppTheme {
 
       ///* Texts
       textTheme: TextTheme(
-          titleLarge: GoogleFonts.montserratAlternates()
-              .copyWith(fontSize: 40, fontWeight: FontWeight.bold),
-          titleMedium: GoogleFonts.montserratAlternates()
-              .copyWith(fontSize: 30, fontWeight: FontWeight.bold),
-          titleSmall:
-              GoogleFonts.montserratAlternates().copyWith(fontSize: 20)),
+          titleLarge: GoogleFonts.raleway()
+              .copyWith(fontSize: 36, fontWeight: FontWeight.bold),
+          titleMedium: GoogleFonts.raleway()
+              .copyWith(fontSize: 24, fontWeight: FontWeight.bold),
+          titleSmall: GoogleFonts.raleway().copyWith(fontSize: 20)),
 
       ///* Scaffold Background Color
       scaffoldBackgroundColor: Colors.scaffoldBackgroundColor,
@@ -24,14 +23,13 @@ class AppTheme {
       ///* Buttons
       filledButtonTheme: FilledButtonThemeData(
           style: ButtonStyle(
-              textStyle: MaterialStatePropertyAll(
-                  GoogleFonts.montserratAlternates()
-                      .copyWith(fontWeight: FontWeight.w700)))),
+              textStyle: MaterialStatePropertyAll(GoogleFonts.raleway()
+                  .copyWith(fontWeight: FontWeight.w700)))),
 
       ///* AppBar
       appBarTheme: AppBarTheme(
         color: Colors.scaffoldBackgroundColor,
-        titleTextStyle: GoogleFonts.montserratAlternates().copyWith(
+        titleTextStyle: GoogleFonts.raleway().copyWith(
             fontSize: 25, fontWeight: FontWeight.bold, color: Colors.black),
       ));
 }

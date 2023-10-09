@@ -12,7 +12,7 @@ class Colors {
   static const white10 = Color(0x1AFFFFFF);
 
   //** to define */
-  static const colorSeed = Color(0xff424CB8);
+  static const colorSeed = Color(0xff5669ff);
   static const scaffoldBackgroundColor = Color(0xFFF8F7F7);
   static const transparent = Color(0x00000000);
   static const redshade = Color(0xFFC62828);

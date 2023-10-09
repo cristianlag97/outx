@@ -59,8 +59,10 @@ class _SideMenuState extends State<SideMenu> {
             child: Consumer(
               builder: (BuildContext context, WidgetRef ref, Widget? child) =>
                   CustomFilledButton(
-                      onPressed: ref.read(authProvider.notifier).logout,
-                      text: 'Cerrar sesión'),
+                onPressed: ref.read(authProvider.notifier).logout,
+                text: 'Cerrar sesión',
+                icon: Icons.arrow_forward_rounded,
+              ),
             ),
           ),
         ]);

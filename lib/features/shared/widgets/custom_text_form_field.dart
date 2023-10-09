@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart' hide Colors;
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:outmap/config/config.dart';
 
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
-    // required this.controller,
     this.onFieldSubmitted,
     this.focusNode,
     this.label,
@@ -13,6 +13,10 @@ class CustomTextFormField extends StatelessWidget {
     this.keyboardType = TextInputType.text,
     this.onChanged,
     this.validator,
+    this.prefixIcon,
+    this.isPassword = false,
+    this.onActivateObscureText,
+    this.initialValue,
     super.key,
   });
 
@@ -23,9 +27,12 @@ class CustomTextFormField extends StatelessWidget {
   final TextInputType? keyboardType;
   final Function(String)? onChanged;
   final String? Function(String?)? validator;
-  // final TextEditingController controller;
   final FocusNode? focusNode;
   final Function(String)? onFieldSubmitted;
+  final Widget? prefixIcon;
+  final bool isPassword;
+  final Function()? onActivateObscureText;
+  final String? initialValue;
 
   @override
   Widget build(BuildContext context) {
@@ -35,41 +42,28 @@ class CustomTextFormField extends StatelessWidget {
         borderSide: const BorderSide(color: Colors.transparent),
         borderRadius: BorderRadius.circular(40));
 
-    const borderRadius = Radius.circular(15);
-
     return Container(
-      width: MediaQuery.of(context).size.width * 0.9,
-      padding: const EdgeInsets.only(
-        left: 8,
-        right: 8,
-        bottom: 8, /*top: 15*/
-      ),
       decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: const BorderRadius.only(
-              topLeft: borderRadius,
-              bottomLeft: borderRadius,
-              bottomRight: borderRadius),
-          boxShadow: [
-            BoxShadow(
-                color: Colors.black.withOpacity(0.06),
-                blurRadius: 10,
-                offset: const Offset(0, 5))
-          ]),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: const Color(0xFFE4DFDF)),
+      ),
       child: TextFormField(
+        initialValue: initialValue,
         onTapOutside: (PointerDownEvent event) =>
             FocusScope.of(context).unfocus(),
         onChanged: onChanged,
-        // controller: controller,
         focusNode: focusNode,
         onFieldSubmitted: onFieldSubmitted,
         validator: validator,
         obscureText: obscureText,
         keyboardType: keyboardType,
-        style: const TextStyle(fontSize: 20, color: Colors.black54),
+        style: const TextStyle(fontSize: 16, color: Color(0xFF747688)),
         decoration: InputDecoration(
           floatingLabelStyle: const TextStyle(
-              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),
+            color: Color(0xFF747688),
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
+          ),
           enabledBorder: border,
           focusedBorder: border,
           errorBorder: const UnderlineInputBorder(
@@ -85,7 +79,18 @@ class CustomTextFormField extends StatelessWidget {
           hintText: hint,
           errorText: errorMessage,
           focusColor: colors.primary,
-          // icon: Icon( Icons.supervised_user_circle_outlined, color: colors.primary, )
+          prefixIcon: prefixIcon,
+          suffixIcon: isPassword
+              ? IconButton(
+                  icon: Icon(
+                    obscureText
+                        ? FontAwesomeIcons.eyeSlash
+                        : FontAwesomeIcons.eye,
+                    color: const Color(0xFF747688),
+                  ),
+                  onPressed: onActivateObscureText,
+                )
+              : null,
         ),
       ),
     );

@@ -1,5 +1,6 @@
 library features.auth.providers.login_form;
 
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:formz/formz.dart';
 import 'package:outmap/features/auth/presentation/providers/auth_firebase/auth_firebase.dart';

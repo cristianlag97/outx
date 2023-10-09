@@ -16,6 +16,7 @@ class RegisterState {
     this.gender = 'Hombre',
     this.type = 'Persona',
     this.category = 'Deportes',
+    this.isObscureText = true,
   });
 
   final Email email;
@@ -27,6 +28,7 @@ class RegisterState {
   final BusinessName businessName;
   final Cedula cedula;
   final String category;
+  final bool isObscureText;
   final bool isFormPosted;
   final bool isValid;
   final bool isCompany;
@@ -48,6 +50,7 @@ class RegisterState {
     BusinessName? businessName,
     Cedula? cedula,
     String? category,
+    bool? isObscureText,
   }) =>
       RegisterState(
         email: email ?? this.email,
@@ -64,6 +67,7 @@ class RegisterState {
         businessName: businessName ?? this.businessName,
         cedula: cedula ?? this.cedula,
         category: category ?? this.category,
+        isObscureText: isObscureText ?? this.isObscureText,
       );
 
   @override

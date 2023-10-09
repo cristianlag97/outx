@@ -7,6 +7,8 @@ class LoginFormState {
     this.isValid = false,
     this.email = const Email.pure(),
     this.password = const Password.pure(),
+    this.isObscureText = true,
+    this.isRemember = false,
   });
 
   final bool isPosting;
@@ -14,6 +16,8 @@ class LoginFormState {
   final bool isValid;
   final Email email;
   final Password password;
+  final bool isObscureText;
+  final bool isRemember;
 
   LoginFormState copyWith({
     bool? isPosting,
@@ -21,6 +25,8 @@ class LoginFormState {
     bool? isValid,
     Email? email,
     Password? password,
+    bool? isObscureText,
+    bool? isRemember,
   }) =>
       LoginFormState(
         isPosting: isPosting ?? this.isPosting,
@@ -28,6 +34,8 @@ class LoginFormState {
         isValid: isValid ?? this.isValid,
         email: email ?? this.email,
         password: password ?? this.password,
+        isObscureText: isObscureText ?? this.isObscureText,
+        isRemember: isRemember ?? this.isRemember,
       );
 
   @override

@@ -5,3 +5,5 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 part 'colors.dart';
 part 'enviroment.dart';
+part 'api.dart';
+part 'size.dart';

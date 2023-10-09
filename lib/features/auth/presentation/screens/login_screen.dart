@@ -6,44 +6,45 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final scaffoldBackgroundColor = Theme.of(context).scaffoldBackgroundColor;
-
-    return GestureDetector(
-      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-      child: Scaffold(
-          body: GeometricalBackground(
-              child: SingleChildScrollView(
-        physics: const ClampingScrollPhysics(),
-        child: Column(
-          children: <Widget>[
-            const SizedBox(height: 80),
-            // Icon Banner
-            const Icon(
-              Icons.production_quantity_limits_rounded,
-              color: Colors.white,
-              size: 100,
-            ),
-            const SizedBox(height: 80),
-
-            Container(
-              height: size.height - 260, // 80 los dos sizebox y 100 el ícono
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: scaffoldBackgroundColor,
-                borderRadius:
-                    const BorderRadius.only(topLeft: Radius.circular(100)),
+    final textStyle = Theme.of(context).textTheme;
+    return Scaffold(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: SizedBox(
+            width: size.width,
+            height: size.height,
+            child: Stack(children: <Widget>[
+              const Positioned(
+                top: -130,
+                right: -120,
+                child: CustomCircileOpacity(),
               ),
-              child: _LoginForm(),
-            )
-          ],
+              const Positioned(
+                bottom: 70,
+                right: -130,
+                child: CustomCircileOpacity(),
+              ),
+              Column(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16),
+                    child: SvgPicture.asset('assets/images/logo.svg'),
+                  ),
+                  const SizedBox(height: 8),
+                  Text('Outx', style: textStyle.titleLarge),
+                  const _LoginForm()
+                ],
+              ),
+            ]),
+          ),
         ),
-      ))),
+      ),
     );
   }
 }
 
 class _LoginForm extends ConsumerWidget {
-  _LoginForm();
+  const _LoginForm();
 
   void showSnackbar(BuildContext context, String messageError) {
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
@@ -52,92 +53,140 @@ class _LoginForm extends ConsumerWidget {
     );
   }
 
-  void _submitEmail(BuildContext context) {
-    FocusScope.of(context).requestFocus(_passwordFocusNode);
-  }
-
-  final FocusNode _passwordFocusNode = FocusNode();
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final textStyles = Theme.of(context).textTheme;
-
     final loginForm = ref.watch(loginFormProvider);
-
-    ref.listen(authProvider, (previous, next) {
-      if (next.errorMessage.isEmpty) return;
-      showSnackbar(context, next.errorMessage);
-    });
-
+    print(
+        'Desde la vista: ${loginForm.email.value} -- ${loginForm.password.value} -- ${loginForm.isRemember}');
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 40),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
-        children: [
+        children: <Widget>[
           const SizedBox(height: 30),
-          Text('Login', style: textStyles.titleLarge),
-          const SizedBox(height: 50),
+          Row(
+            children: [
+              Text('Login', style: textStyles.titleMedium),
+            ],
+          ),
+          const SizedBox(height: 20),
           CustomTextFormField(
-            onFieldSubmitted: (_) => _submitEmail(context),
-            label: 'Correo',
+            initialValue: loginForm.isRemember ? loginForm.email.value : null,
             keyboardType: TextInputType.emailAddress,
+            hint: 'Email',
             onChanged: ref.read(loginFormProvider.notifier).onEmailChange,
             errorMessage:
                 loginForm.isFormPosted ? loginForm.email.errorMessage : null,
+            prefixIcon: const Icon(
+              FontAwesomeIcons.envelope,
+              color: Color(0xFF747688),
+            ),
           ),
-          const SizedBox(height: 30),
+          const SizedBox(height: 18),
           CustomTextFormField(
-            onFieldSubmitted: (_) =>
-                ref.read(loginFormProvider.notifier).onformSubmit(),
-            focusNode: _passwordFocusNode,
-            label: 'Contraseña',
-            obscureText: true,
+            initialValue:loginForm.password.value,
+            keyboardType: TextInputType.text,
+            onActivateObscureText:
+                ref.read(loginFormProvider.notifier).onChangeObscureText,
+            isPassword: true,
+            obscureText: loginForm.isObscureText,
+            hint: 'Contraseña',
             onChanged: ref.read(loginFormProvider.notifier).onPasswordChanged,
             errorMessage:
                 loginForm.isFormPosted ? loginForm.password.errorMessage : null,
-          ),
-          const SizedBox(height: 30),
-          SizedBox(
-            width: double.infinity,
-            height: 60,
-            child: CustomFilledButton(
-              text: 'Ingresar',
-              buttonColor: Colors.black,
-              onPressed: loginForm.isPosting
-                  ? null
-                  : ref.read(loginFormProvider.notifier).onformSubmit,
+            prefixIcon: const Icon(
+              Icons.lock_outline_rounded,
+              size: 24,
+              color: Color(0xFF747688),
             ),
           ),
+          const SizedBox(height: 18),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              FilledButton.icon(
-                  style: FilledButton.styleFrom(backgroundColor: Colors.black),
-                  onPressed: () {
-                    ref.read(authFirebaseProvider.notifier).signInWithGoogle();
-                  },
-                  icon: const FaIcon(FontAwesomeIcons.google),
-                  label: const Text('Google')),
-              FilledButton.icon(
-                  style: FilledButton.styleFrom(backgroundColor: Colors.black),
-                  onPressed: () async {
-                    await ref
-                        .read(authFirebaseProvider.notifier)
-                        .signInWithFacebook();
-                  },
-                  icon: const FaIcon(FontAwesomeIcons.facebook),
-                  label: const Text('Facebook')),
+            children: [
+              Row(
+                children: <Widget>[
+                  Switch(
+                    value: loginForm.isRemember,
+                    onChanged:
+                        ref.read(loginFormProvider.notifier).onChangeRemember,
+                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  ),
+                  const Text(
+                    'Recuerdame',
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ),
+              TextButton(
+                onPressed: () {},
+                child: const Text(
+                  '¿Olvidaste tu contraseña?',
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
             ],
           ),
+          const SizedBox(height: 18),
+          CustomFilledButton(
+            text: 'LOGIN',
+            buttonColor: Colors.colorSeed,
+            onPressed: loginForm.isPosting
+                ? null
+                : ref.read(loginFormProvider.notifier).onformSubmit,
+            icon: Icons.arrow_forward_rounded,
+          ),
+          const SizedBox(height: 18),
+          const Text(
+            'O',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          const SizedBox(height: 18),
+          CustomFilledButton(
+            isPrimaryButton: false,
+            buttonColor: Colors.white,
+            img: 'assets/images/google.png',
+            text: 'Login con Google',
+            onPressed: () {
+              ref.read(authFirebaseProvider.notifier).signInWithGoogle();
+            },
+          ),
+          const SizedBox(height: 8),
+          CustomFilledButton(
+            isPrimaryButton: false,
+            buttonColor: Colors.white,
+            img: 'assets/images/facebook.png',
+            text: 'Login con Facebook',
+            onPressed: () async {
+              await ref
+                  .read(authFirebaseProvider.notifier)
+                  .signInWithFacebook();
+            },
+          ),
+          const SizedBox(height: 18),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text('¿No tienes cuenta?'),
+              const Text('¿No tienes una cuenta?'),
               TextButton(
-                  onPressed: () => context.push('/register'),
-                  child: const Text('Crea una aquí'))
+                  onPressed: () {
+                    if (context.canPop()) {
+                      return context.pop();
+                    }
+                    context.push('/register');
+                  },
+                  child: const Text('registro'))
             ],
           ),
-          const Spacer(flex: 1),
         ],
       ),
     );
