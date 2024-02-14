@@ -50,19 +50,19 @@ class _Map extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TextEditingController controller = TextEditingController();
-    Map<String, Polyline> polylines =
-        Map<String, Polyline>.from(outMap.polylines);
-    if (!outMap.showMyRoute) {
-      polylines.removeWhere((key, value) => key == 'myRoute');
-    }
+    // Map<String, Polyline> polylines =
+    //     Map<String, Polyline>.from(outMap.polylines);
+    // if (!outMap.showMyRoute) {
+    //   polylines.removeWhere((key, value) => key == 'myRoute');
+    // }
 
     return SingleChildScrollView(
       child: Stack(
         children: <Widget>[
-          MapView(
-            lastKnowLocation: outLocation.lastKnowLocation!,
-            polylines: polylines.values.toSet(),
-          ),
+          // MapView(
+          //   lastKnowLocation: outLocation.lastKnowLocation!,
+          //   polylines: polylines.values.toSet(),
+          // ),
           const SearchMap(),
           // Positioned(
           //   top: 50,

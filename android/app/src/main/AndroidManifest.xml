@@ -10,8 +10,10 @@
         android:label="outmap"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
-        <meta-data android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBMd8qcepPP3gFVQGeRrE2kXHfEJZKf7pI"/>
+        <!-- <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDuywUDShKIJf350KXETaY7LPx4Eo3ENDs"/> -->
+        <meta-data android:name="com.mapbox.mapboxsdk.accessToken"
+            android:value="pk.eyJ1IjoiY3Jpc3RpYW5kbGFnOTciLCJhIjoiY2xzbDEzN2s0MDg2MzJrbzlyanRxbmtqeSJ9.YZEvfVlZnSKCEVC17xxVPQ" />
         <meta-data android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
         <meta-data  android:name="com.facebook.sdk.ApplicationId"

@@ -17,6 +17,8 @@ class CustomTextFormField extends StatelessWidget {
     this.isPassword = false,
     this.onActivateObscureText,
     this.initialValue,
+    this.isBorderRadius = true,
+    this.fontSize = 16,
     super.key,
   });
 
@@ -33,6 +35,8 @@ class CustomTextFormField extends StatelessWidget {
   final bool isPassword;
   final Function()? onActivateObscureText;
   final String? initialValue;
+  final bool isBorderRadius;
+  final double fontSize;
 
   @override
   Widget build(BuildContext context) {
@@ -44,8 +48,9 @@ class CustomTextFormField extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFFE4DFDF)),
+        borderRadius: isBorderRadius ? BorderRadius.circular(12) : null,
+        border:
+            isBorderRadius ? Border.all(color: const Color(0xFFE4DFDF)) : null,
       ),
       child: TextFormField(
         initialValue: initialValue,
@@ -57,12 +62,12 @@ class CustomTextFormField extends StatelessWidget {
         validator: validator,
         obscureText: obscureText,
         keyboardType: keyboardType,
-        style: const TextStyle(fontSize: 16, color: Color(0xFF747688)),
+        style: TextStyle(fontSize: fontSize, color: const Color(0xFF747688)),
         decoration: InputDecoration(
-          floatingLabelStyle: const TextStyle(
-            color: Color(0xFF747688),
+          floatingLabelStyle: TextStyle(
+            color: const Color(0xFF747688),
             fontWeight: FontWeight.bold,
-            fontSize: 16,
+            fontSize: fontSize,
           ),
           enabledBorder: border,
           focusedBorder: border,
@@ -76,6 +81,8 @@ class CustomTextFormField extends StatelessWidget {
           )),
           isDense: true,
           label: label != null ? Text(label!) : null,
+          labelStyle:
+              TextStyle(fontSize: fontSize, color: const Color(0xFF747688)),
           hintText: hint,
           errorText: errorMessage,
           focusColor: colors.primary,

@@ -1,4 +1,4 @@
-part of features.auth.presentation.screens;
+part of 'screens.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -177,13 +177,14 @@ class _LoginForm extends ConsumerWidget {
             children: [
               const Text('¿No tienes una cuenta?'),
               TextButton(
-                  onPressed: () {
-                    if (context.canPop()) {
-                      return context.pop();
-                    }
-                    context.push('/register');
-                  },
-                  child: const Text('registro'))
+                onPressed: () {
+                  if (context.canPop()) {
+                    return context.pop();
+                  }
+                  context.push(PAGES.register.screenPath);
+                },
+                child: const Text('Registro'),
+              )
             ],
           ),
         ],

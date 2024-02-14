@@ -11,11 +11,15 @@ class AppTheme {
 
       ///* Texts
       textTheme: TextTheme(
-          titleLarge: GoogleFonts.raleway()
-              .copyWith(fontSize: 36, fontWeight: FontWeight.bold),
-          titleMedium: GoogleFonts.raleway()
-              .copyWith(fontSize: 24, fontWeight: FontWeight.bold),
-          titleSmall: GoogleFonts.raleway().copyWith(fontSize: 20)),
+        titleLarge: GoogleFonts.raleway()
+            .copyWith(fontSize: 36, fontWeight: FontWeight.bold),
+        titleMedium: GoogleFonts.raleway()
+            .copyWith(fontSize: 24, fontWeight: FontWeight.bold),
+        titleSmall: GoogleFonts.raleway().copyWith(fontSize: 20),
+        bodyLarge: GoogleFonts.raleway().copyWith(fontSize: 18),
+        bodyMedium: GoogleFonts.raleway().copyWith(fontSize: 16),
+        bodySmall: GoogleFonts.raleway().copyWith(fontSize: 14),
+      ),
 
       ///* Scaffold Background Color
       scaffoldBackgroundColor: Colors.scaffoldBackgroundColor,

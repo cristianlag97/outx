@@ -1,4 +1,4 @@
-part of com.feature.outmap.presentation.provder.location;
+part of 'location.dart';
 
 class OutMapLocationNotifier extends StateNotifier<OutMapLocationState> {
   OutMapLocationNotifier() : super(const OutMapLocationState());

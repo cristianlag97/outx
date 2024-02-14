@@ -1,21 +1,21 @@
-part of com.feature.outmap.presentation.provder.map;
+part of 'map.dart';
 
 class OutMapState extends Equatable {
   const OutMapState({
     this.isFollowingUser = true,
     this.isMapInitialized = false,
     this.showMyRoute = true,
-    Map<String, Polyline>? polylines,
+    Map<String, LineOptions>? polylines,
   }) : polylines = polylines ?? const {};
 
   final bool isMapInitialized, isFollowingUser, showMyRoute;
-  final Map<String, Polyline> polylines;
+  final Map<String, LineOptions> polylines;
 
   OutMapState copyWith({
     bool? isMapInitialized,
     bool? isFollowingUser,
     bool? showMyRoute,
-    Map<String, Polyline>? polylines,
+    Map<String, LineOptions>? polylines,
   }) =>
       OutMapState(
         isMapInitialized: isMapInitialized ?? this.isMapInitialized,

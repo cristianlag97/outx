@@ -139,7 +139,7 @@ class AuthFirebaseDatasourceImpl extends AuthFirebaseDataSource {
     bool isGoogle = false,
     bool isFacebook = false,
   }) async {
-    UserModel user = UserModel.fromJson({
+    UserModel.fromJson({
       "id": userCredential.uid,
       "fullName": userCredential.displayName,
       "email": userCredential.email,
@@ -147,6 +147,6 @@ class AuthFirebaseDatasourceImpl extends AuthFirebaseDataSource {
       "isGoogle": isGoogle,
       "isFacebook": isFacebook,
     });
-    return user as User;
+    return userCredential;
   }
 }

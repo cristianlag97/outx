@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:formz/formz.dart';
 import 'package:outmap/features/auth/presentation/providers/auth_firebase/auth_firebase.dart';
 
+import '../../../../../config/config.dart';
 import '../../../../shared/shared.dart';
 import '../auth/auth.dart';
 

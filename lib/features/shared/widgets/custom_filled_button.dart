@@ -10,6 +10,7 @@ class CustomFilledButton extends StatelessWidget {
   final IconData? icon;
   final String? img;
   final double left;
+  final Radius borderRadius;
 
   const CustomFilledButton({
     this.icon,
@@ -19,21 +20,20 @@ class CustomFilledButton extends StatelessWidget {
     this.isPrimaryButton = true,
     this.img,
     this.left = 85,
+    this.borderRadius = const Radius.circular(10),
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    const radius = Radius.circular(10);
-
     return SizedBox(
       width: 271,
       height: 58,
       child: FilledButton(
         style: FilledButton.styleFrom(
           backgroundColor: buttonColor,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(radius),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(borderRadius),
           ),
         ),
         onPressed: onPressed,

@@ -1,20 +1,13 @@
 import 'package:dio/dio.dart';
-import 'package:outmap/config/config.dart';
 
+import '../../../../config/plugins/dio_plugin.dart';
 import '../../domain/domain.dart';
 import '../infraestructure.dart';
 
 class ProductsDatasourceImpl extends ProductsDataSource {
-  ProductsDatasourceImpl({required this.accesToken})
-      : dio = Dio(
-          BaseOptions(
-            baseUrl: Environment.apiUrl,
-            headers: {'Authorization': 'Bearer $accesToken'},
-          ),
-        );
+  ProductsDatasourceImpl({required this.accesToken});
 
   final String accesToken;
-  late final Dio dio;
 
   @override
   Future<Product> createUpdateProduct(Map<String, dynamic> productLike) {

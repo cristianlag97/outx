@@ -1,5 +1,5 @@
 export 'theme/app_theme.dart';
 export 'theme/style_map.dart';
 export 'constans/constans.dart';
-export 'router/app_router.dart';
-export '../features/shared/infraestructure/services/api/dio.dart';
+export 'plugins/plugins.dart';
+export 'router/router.dart';

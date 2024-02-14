@@ -2,7 +2,7 @@ library features.auth.providers.auth;
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../shared/shared.dart';
+import '../../../../../config/config.dart';
 import '../../../domain/domain.dart';
 import '../../../infraestructure/infraestructure.dart';
 

@@ -1,4 +1,4 @@
-part of features.auth.presentation.screens;
+part of 'screens.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
@@ -125,9 +125,11 @@ class _RegisterForm extends ConsumerWidget {
           ),
           const SizedBox(height: 18),
           CustomDropDownButton(
-            dropdownValue: 'Masculino',
-            dropdownItems: const ['Masculino', 'Femenino', 'Otros'],
-            onChanged: (String? purbea) {},
+            dropdownValue: Gender.male.name,
+            dropdownItems: genderValues.map.keys.toList(),
+            onChanged: (gender) {
+              genderValues.map[gender];
+            },
           ),
           const SizedBox(height: 18),
           Row(
@@ -150,15 +152,20 @@ class _RegisterForm extends ConsumerWidget {
           if (registerform.isCompany) ...[
             const SizedBox(height: 24),
             FadeInUp(
-                duration: const Duration(seconds: 1),
-                child: const _RegisterCompanyForm())
+              duration: const Duration(seconds: 1),
+              child: const _RegisterCompanyForm(),
+            )
           ],
           const SizedBox(height: 24),
           CustomFilledButton(
             text: 'REGISTRARME',
             left: 50,
             buttonColor: Colors.colorSeed,
-            onPressed: ref.read(registerProvider.notifier).onSubmit,
+            onPressed: () {
+              //TODO: Activar cuando hayan servicios
+              // ref.read(registerProvider.notifier).onSubmit;
+              context.pushReplacement(PAGES.venuesAndEvents.screenPath);
+            },
             icon: Icons.arrow_forward_rounded,
           ),
         ],

@@ -1,6 +1,10 @@
 part of features.auth.providers.auth;
 
-enum AuthStatus { checking, authenticated, notAuthenticated }
+enum AuthStatus {
+  checking,
+  authenticated,
+  notAuthenticated,
+}
 
 class AuthState {
   AuthState({

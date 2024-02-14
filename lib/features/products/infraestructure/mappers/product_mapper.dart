@@ -1,4 +1,4 @@
-import 'package:outmap/config/config.dart';
+import 'package:outmap/config/plugins/dotenv_plugin.dart';
 import 'package:outmap/features/auth/infraestructure/infraestructure.dart';
 
 import '../../domain/domain.dart';
@@ -19,7 +19,7 @@ class ProductMapper {
           json['images'].map(
             (image) => image.startsWith('http')
                 ? image
-                : '${Environment.apiUrl}/files/product/$image',
+                : '${DotenvPlugin.apiUrl}/files/product/$image',
           ),
         ),
       );

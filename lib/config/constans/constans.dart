@@ -1,9 +1,8 @@
 library config.constants;
 
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+export 'enums/enum.dart';
 
 part 'colors.dart';
-part 'enviroment.dart';
 part 'api.dart';
 part 'size.dart';
